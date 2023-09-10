@@ -152,8 +152,6 @@ function OnDriverLateInit()
 	for property, _ in pairs(Properties) do
 		OnPropertyChanged(property)
 	end
-
-	LOCK_STATE = "unknown"
 end
 
 function OnDriverDestroyed()
