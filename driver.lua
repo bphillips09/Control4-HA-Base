@@ -7,8 +7,8 @@ EntityID = Properties["Entity ID"]
 Connected = false
 
 JSON = require("module.json")
+require('Control4-HA-Base.helpers')
 require('commands')
-require('helpers')
 
 function HandlerDebug(init, tParams, args)
 	if (not DEBUGPRINT) then
