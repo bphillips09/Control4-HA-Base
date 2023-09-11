@@ -8,6 +8,7 @@ Connected = false
 
 JSON = require("module.json")
 require('commands')
+require('helpers')
 
 function HandlerDebug(init, tParams, args)
 	if (not DEBUGPRINT) then
