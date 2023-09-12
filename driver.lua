@@ -2,6 +2,7 @@
 EC = {}
 OPC = {}
 RFP = {}
+DRV = {}
 REQ = {}
 EntityID = Properties["Entity ID"]
 Connected = false
@@ -143,20 +144,52 @@ function ReceivedFromProxy(idBinding, strCommand, tParams)
 	end
 end
 
-function OnDriverInit()
+function OnDriverInit(init)
 	print("--driver init--")
+
+	Delegate(DRV, { "OnDriverInit" }, init)
 end
 
-function OnDriverLateInit()
+function OnDriverLateInit(init)
 	print("--driver late init--")
 
 	for property, _ in pairs(Properties) do
 		OnPropertyChanged(property)
 	end
+
+	Delegate(DRV, { "OnDriverLateInit" }, init)
 end
 
-function OnDriverDestroyed()
+function OnDriverInitComplete(init)
+	print("--driver init complete--")
+
+	Delegate(DRV, { "OnDriverInitComplete" }, init)
+end
+
+function OnDriverRemovedFromProject(init)
+	print("--driver removed--")
+
+	Delegate(DRV, { "OnDriverRemovedFromProject" }, init)
+end
+
+function OnDriverDestroyed(init)
 	print("--driver destroyed--")
+
+	Delegate(DRV, { "OnDriverDestroyed" }, init)
+end
+
+function Delegate(GLOB, nameTable, ...)
+	local args = { ... }
+
+	for _, name in pairs(nameTable) do
+		if GLOB[name] then
+			return GLOB[name](table.unpack(args))
+		end
+	end
+
+	if GLOB.DEFAULT then
+		return GLOB.DEFAULT(table.unpack(args))
+	end
 end
 
 function UIRequest(strCommand, tParams)
