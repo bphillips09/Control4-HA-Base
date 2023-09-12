@@ -181,6 +181,10 @@ end
 function Delegate(GLOB, nameTable, ...)
 	local args = { ... }
 
+	if not table.unpack then
+		table.unpack = unpack
+	end
+
 	for _, name in pairs(nameTable) do
 		if GLOB[name] then
 			return GLOB[name](table.unpack(args))
