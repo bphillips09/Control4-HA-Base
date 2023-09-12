@@ -220,6 +220,14 @@ function OPC.Entity_ID(value)
 	C4:SendToProxy(999, "HA_GET_STATE", tParams)
 end
 
+function OPC.Sensor_Type(value)
+	local tParams = {
+		entity = EntityID
+	}
+
+	C4:SendToProxy(999, "HA_GET_STATE", tParams)
+end
+
 function OPC.Driver_Version(value)
 	local version = C4:GetDriverConfigInfo('version')
 	C4:UpdateProperty('Driver Version', version)
