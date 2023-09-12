@@ -41,3 +41,12 @@ end
 function TablesMatch(a, b)
     return table.concat(a) == table.concat(b)
 end
+
+
+function ToCelsius(f)
+    return (f - 32) * 5 / 9
+end
+
+function ToFahrenheit(c)
+    return c * 9 / 5 + 32
+end
