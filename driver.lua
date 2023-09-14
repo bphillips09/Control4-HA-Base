@@ -178,6 +178,12 @@ function OnDriverDestroyed(init)
 	Delegate(DRV, { "OnDriverDestroyed" }, init)
 end
 
+function OnBindingChanged(idBinding, strClass, bIsBound)
+	print("--change binding--")
+
+	Delegate(DRV, { "OnBindingChanged" }, idBinding, strClass, bIsBound)
+end
+
 function Delegate(GLOB, nameTable, ...)
 	local args = { ... }
 
