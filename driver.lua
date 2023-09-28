@@ -219,19 +219,11 @@ end
 function OPC.Entity_ID(value)
 	EntityID = value
 
-	local tParams = {
-		entity = value
-	}
-
-	C4:SendToProxy(999, "HA_GET_STATE", tParams)
+	EC.REFRESH()
 end
 
 function OPC.Sensor_Type(value)
-	local tParams = {
-		entity = EntityID
-	}
-
-	C4:SendToProxy(999, "HA_GET_STATE", tParams)
+	EC.REFRESH()
 end
 
 function OPC.Driver_Version(value)
@@ -252,4 +244,12 @@ function OPC.Debug_Mode(value)
 		end
 		DebugPrintTimer = C4:SetTimer(60 * 60 * 1000, _timer)
 	end
+end
+
+function EC.REFRESH()
+	local tParams = {
+		entity = EntityID
+	}
+
+	C4:SendToProxy(999, "HA_GET_STATE", tParams)
 end
