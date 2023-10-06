@@ -6,6 +6,7 @@ DRV = {}
 REQ = {}
 EntityID = Properties["Entity ID"]
 Connected = false
+PollTimer = nil
 
 JSON = require("module.json")
 require('Control4-HA-Base.helpers')
@@ -243,6 +244,20 @@ function OPC.Debug_Mode(value)
 			OnPropertyChanged('Debug Mode')
 		end
 		DebugPrintTimer = C4:SetTimer(60 * 60 * 1000, _timer)
+	end
+end
+
+function OPC.Poll_Timer(value)
+	if value == "On" then
+		if PollTimer ~= nil then
+			PollTimer:Cancel()
+		end
+
+		PollTimer = C4:SetTimer(30000, EC.REFRESH, true)
+	else
+		if PollTimer ~= nil then
+			PollTimer:Cancel()
+		end
 	end
 end
 
