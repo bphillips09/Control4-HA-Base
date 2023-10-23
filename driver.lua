@@ -149,6 +149,8 @@ function OnDriverInit(init)
 	print("--driver init--")
 
 	Delegate(DRV, { "OnDriverInit" }, init)
+
+    C4:AddVariable("ENTITY_ID", "", "STRING")
 end
 
 function OnDriverLateInit(init)
@@ -177,6 +179,8 @@ function OnDriverDestroyed(init)
 	print("--driver destroyed--")
 
 	Delegate(DRV, { "OnDriverDestroyed" }, init)
+
+    C4:DeleteVariable("ENTITY_ID")
 end
 
 function OnBindingChanged(idBinding, strClass, bIsBound)
@@ -221,6 +225,8 @@ function OPC.Entity_ID(value)
 	EntityID = value
 
 	EC.REFRESH()
+
+	C4:SetVariable("ENTITY_ID", value)
 end
 
 function OPC.Sensor_Type(value)
