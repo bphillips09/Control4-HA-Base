@@ -50,3 +50,10 @@ end
 function ToFahrenheit(c)
     return c * 9 / 5 + 32
 end
+
+function Sleep(a)
+	local sec = tonumber(os.clock() + a)
+
+	while (os.clock() < sec) do
+	end
+end
