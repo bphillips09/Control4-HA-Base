@@ -150,7 +150,7 @@ function OnDriverInit(init)
 
 	Delegate(DRV, { "OnDriverInit" }, init)
 
-    C4:AddVariable("ENTITY_ID", "", "STRING")
+	C4:AddVariable("ENTITY_ID", "", "STRING")
 end
 
 function OnDriverLateInit(init)
@@ -180,13 +180,17 @@ function OnDriverDestroyed(init)
 
 	Delegate(DRV, { "OnDriverDestroyed" }, init)
 
-    C4:DeleteVariable("ENTITY_ID")
+	C4:DeleteVariable("ENTITY_ID")
 end
 
 function OnBindingChanged(idBinding, strClass, bIsBound)
 	print("--change binding--")
 
 	Delegate(DRV, { "OnBindingChanged" }, idBinding, strClass, bIsBound)
+end
+
+function OnVariableChanged(strName)
+	Delegate(DRV, { "OnVariableChanged" }, strName, Variables[strName])
 end
 
 function Delegate(GLOB, nameTable, ...)
