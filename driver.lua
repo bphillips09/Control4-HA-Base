@@ -179,8 +179,6 @@ function OnDriverDestroyed(init)
 	print("--driver destroyed--")
 
 	Delegate(DRV, { "OnDriverDestroyed" }, init)
-
-	C4:DeleteVariable("ENTITY_ID")
 end
 
 function OnBindingChanged(idBinding, strClass, bIsBound)
