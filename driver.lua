@@ -4,6 +4,7 @@ OPC = {}
 RFP = {}
 DRV = {}
 REQ = {}
+GCPL = {}
 EntityID = Properties["Entity ID"]
 Connected = false
 PollTimer = nil
@@ -220,6 +221,28 @@ function UIRequest(strCommand, tParams)
 		return (ret)
 	elseif (success == false) then
 		print('UIRequest error: ', ret, strCommand)
+	end
+end
+
+function GetCommandParamList(strCommand, strParam)
+	local init = {
+		"GetCommandParamList: " .. strCommand,
+		strParam,
+	}
+	HandlerDebug(init)
+
+	strCommand = string.gsub(strCommand, '%s+', '_')
+
+	local success, ret
+
+	if GCPL and GCPL[strCommand] and type(GCPL[strCommand]) == "function" then
+		success, ret = pcall(GCPL[strCommand], strParam)
+	end
+
+	if success == true then
+		return ret
+	elseif success == false then
+		print("GetCommandParamList error: ", ret, strCommand, strParam)
 	end
 end
 
