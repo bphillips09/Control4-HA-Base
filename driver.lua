@@ -254,10 +254,6 @@ function OPC.Entity_ID(value)
 	C4:SetVariable("ENTITY_ID", value)
 end
 
-function OPC.Sensor_Type(value)
-	EC.REFRESH()
-end
-
 function OPC.Driver_Version(value)
 	local version = C4:GetDriverConfigInfo('version')
 	C4:UpdateProperty('Driver Version', version)
